@@ -1,20 +1,129 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Testing | Cape News</title><link rel="stylesheet" href="_static/preview.css">
-</head><body><header><div class="inner"><h1>Cape News</h1><p>Django News Application documentation</p></div></header>
-<main><nav><strong>Project guide</strong><a href="index.html">Home</a><a href="getting_started.html">Getting started</a><a href="users_and_roles.html">Users and roles</a><a href="api_guide.html">REST API</a><a href="docker_setup.html">Docker</a><a href="testing.html">Testing</a><a href="modules.html">Python reference</a></nav><article><h2>Testing and code checks</h2>
-<p>The existing `news/tests.py` file covers reader access, the journalist and</p>
-<p>editor actions, subscription filtering, newsletters, API permissions, and</p>
-<p>approval notifications.</p>
-<p>Run these commands after installing the requirements</p>
-<pre><code>python manage.py check
-python manage.py makemigrations --check --dry-run
-python manage.py test
-flake8 .</code></pre>
-<p>Build the HTML documentation with Sphinx</p>
-<pre><code>sphinx-build -b html docs docs/_build/html</code></pre>
-<p>Open `docs/_build/html/index.html` in a browser to read the finished docs.</p>
-<p>Keep the generated HTML output when uploading the project to GitHub.</p>
-<p>The checks should be run again after making any code changes, especially if</p>
-<p>changing database settings or Docker files.</p></article></main>
-<footer>HTML preview generated from the Sphinx source files. Run sphinx-build to generate the official Sphinx HTML output.</footer></body></html>
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Testing and code checks &#8212; Cape News - Django News Application 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=1b4fdc51" />
+    <script src="_static/documentation_options.js?v=f2a433a1"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Python code reference" href="modules.html" />
+    <link rel="prev" title="Running with Docker" href="docker_setup.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="testing-and-code-checks">
+<h1>Testing and code checks<a class="headerlink" href="#testing-and-code-checks" title="Link to this heading">¶</a></h1>
+<p>The existing <code class="docutils literal notranslate"><span class="pre">news/tests.py</span></code> file covers reader access, the journalist and
+editor actions, subscription filtering, newsletters, API permissions, and
+approval notifications.</p>
+<p>Run these commands after installing the requirements:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">check</span>
+<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">makemigrations</span> <span class="o">--</span><span class="n">check</span> <span class="o">--</span><span class="n">dry</span><span class="o">-</span><span class="n">run</span>
+<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">test</span>
+<span class="n">flake8</span> <span class="o">.</span>
+</pre></div>
+</div>
+<p>Build the HTML documentation with Sphinx:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sphinx</span><span class="o">-</span><span class="n">build</span> <span class="o">-</span><span class="n">b</span> <span class="n">html</span> <span class="n">docs</span> <span class="n">docs</span><span class="o">/</span><span class="n">_build</span><span class="o">/</span><span class="n">html</span>
+</pre></div>
+</div>
+<p>Open <code class="docutils literal notranslate"><span class="pre">docs/_build/html/index.html</span></code> in a browser to read the finished docs.
+Keep the generated HTML output when uploading the project to GitHub.</p>
+<p>The checks should be run again after making any code changes, especially if
+changing database settings or Docker files.</p>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Cape News - Django News Application</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Project guide</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="users_and_roles.html">Users and roles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_guide.html">REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker_setup.html">Running with Docker</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Testing and code checks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">Python code reference</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="docker_setup.html" title="previous chapter">Running with Docker</a></li>
+      <li>Next: <a href="modules.html" title="next chapter">Python code reference</a></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2026, Cape News project.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.2.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

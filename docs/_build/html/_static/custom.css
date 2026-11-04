@@ -1,0 +1,5 @@
+/* Keep the instructions comfortable to read on a laptop. */
+body { font-family: "Segoe UI", Arial, sans-serif; }
+div.document { max-width: 1100px; }
+div.body { line-height: 1.7; }
+div.body h1, div.body h2 { color: #143c58; }
