@@ -1,3 +1,5 @@
+"""Django app configuration for the news website."""
+
 # AppConfig is Django's configuration class for an application.
 from django.apps import AppConfig
 
