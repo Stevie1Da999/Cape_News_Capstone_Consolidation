@@ -1,0 +1,25 @@
+NEWS APPLICATION - REQUIREMENTS
+
+Functional requirements
+1. The system must support Reader, Editor and Journalist user roles.
+2. Readers can view approved articles and newsletters.
+3. Readers can subscribe to publishers and individual journalists.
+4. Journalists can create, view, update and delete their own articles.
+5. New or edited Journalist articles must wait for Editor approval.
+6. Editors can review, update, delete and approve articles.
+7. Journalists and Editors can create and manage newsletters.
+8. Publishers can have multiple Editors and Journalists.
+9. Approving an article emails subscribed Readers.
+10. Approving an article also POSTs article information to /api/approved/.
+11. The REST API must expose approved articles, subscribed articles and article detail/CRUD endpoints.
+12. API users authenticate using DRF tokens.
+
+Non-functional requirements
+1. The code should follow PEP 8 and use clear names and comments.
+2. Role permissions must be checked on the server, not only hidden in HTML.
+3. Forms must use Django CSRF protection.
+4. Passwords must use Django's built-in password hashing and validation.
+5. Database relationships should avoid repeating the same publisher, user or article data.
+6. The website should remain readable on desktop and mobile screens.
+7. API and email failures should be handled without crashing the approval workflow.
+8. Automated tests should cover successful and rejected requests.

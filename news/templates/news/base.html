@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Keeping the layout simple so it feels like a student-built news site. -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Cape News{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'news/styles.css' %}">
+</head>
+<body>
+    <header class="site-header">
+        <div class="wrap header-row">
+            <a class="brand" href="{% url 'article_list' %}">CAPE NEWS</a>
+            <nav>
+                <a href="{% url 'article_list' %}">Home</a>
+                <a href="{% url 'newsletter_list' %}">Newsletters</a>
+
+                {% if user.is_authenticated %}
+                    {% if user.role == "reader" %}
+                        <a href="{% url 'subscriptions' %}">Subscriptions</a>
+                    {% elif user.role == "journalist" %}
+                        <a href="{% url 'my_articles' %}">My Articles</a>
+                        <a href="{% url 'article_create' %}">Write</a>
+                        <a href="{% url 'newsletter_create' %}">Newsletter</a>
+                    {% elif user.role == "editor" %}
+                        <a href="{% url 'editor_review' %}">Review</a>
+                        <a href="{% url 'newsletter_create' %}">Newsletter</a>
+                    {% endif %}
+
+                    <span class="user-tag">
+                        {{ user.username }} · {{ user.get_role_display }}
+                    </span>
+                    <!-- Logout changes session data, so it is sent as POST. -->
+                    <form class="nav-form" method="post" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <button class="link-button" type="submit">Logout</button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'login' %}">Login</a>
+                    <a href="{% url 'register' %}">Register</a>
+                {% endif %}
+            </nav>
+        </div>
+    </header>
+
+    <main class="wrap page-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrap">
+            <p>Cape News · Independent and local stories from South Africa.</p>
+        </div>
+    </footer>
+</body>
+</html>

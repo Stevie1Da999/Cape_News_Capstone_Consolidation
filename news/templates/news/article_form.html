@@ -1,0 +1,17 @@
+{% extends "news/base.html" %}
+{% block title %}{{ page_title }} | Cape News{% endblock %}
+
+{% block content %}
+<div class="form-shell">
+    <p class="eyebrow">JOURNALIST DESK</p>
+    <h1>{{ page_title }}</h1>
+    <p>Publisher is optional. Leave it blank when writing independently.</p>
+
+    <!-- The approval field is deliberately not in this form. -->
+    <form method="post" class="stack-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="button" type="submit">Save article</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "news/base.html" %}
+{% block title %}My Subscriptions | Cape News{% endblock %}
+
+{% block content %}
+<div class="form-shell">
+    <p class="eyebrow">MY FEED</p>
+    <h1>Subscriptions</h1>
+    <p>Follow publishers and individual journalists. Your API subscribed feed uses these choices.</p>
+    <form method="post" class="stack-form checkbox-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="button" type="submit">Save subscriptions</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "news/base.html" %}
+{% block title %}Latest News | Cape News{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <p class="eyebrow">CAPE TOWN · SOUTH AFRICA</p>
+    <h1>Latest stories</h1>
+    <p>Approved stories from local publishers and independent journalists.</p>
+</section>
+
+<section class="story-grid">
+    <!-- Only approved articles reach this template from the view. -->
+    {% for article in articles %}
+        <article class="story-card">
+            <p class="meta">
+                {% if article.publisher %}
+                    {{ article.publisher.name }}
+                {% else %}
+                    Independent
+                {% endif %}
+                · {{ article.created_at|date:"d M Y" }}
+            </p>
+            <h2>
+                <a href="{% url 'article_detail' article.pk %}">
+                    {{ article.title }}
+                </a>
+            </h2>
+            <p>{{ article.content|truncatewords:32 }}</p>
+            <p class="byline">By {{ article.author.username }}</p>
+        </article>
+    {% empty %}
+        <div class="empty-box">
+            <h2>No stories yet</h2>
+            <p>Approved articles will show here once an editor publishes them.</p>
+        </div>
+    {% endfor %}
+</section>
+{% endblock %}

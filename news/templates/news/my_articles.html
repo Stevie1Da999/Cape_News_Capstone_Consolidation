@@ -1,0 +1,30 @@
+{% extends "news/base.html" %}
+{% block title %}My Articles | Cape News{% endblock %}
+
+{% block content %}
+<div class="page-heading">
+    <div>
+        <p class="eyebrow">JOURNALIST DESK</p>
+        <h1>My articles</h1>
+    </div>
+    <a class="button" href="{% url 'article_create' %}">Write new article</a>
+</div>
+
+{% for article in articles %}
+    <article class="manage-row">
+        <div>
+            <p class="status {% if article.approved %}approved{% else %}pending{% endif %}">
+                {% if article.approved %}Approved{% else %}Waiting for approval{% endif %}
+            </p>
+            <h2>{{ article.title }}</h2>
+            <p>{{ article.created_at|date:"d M Y, H:i" }}</p>
+        </div>
+        <div class="actions">
+            <a href="{% url 'article_update' article.pk %}">Edit</a>
+            <a href="{% url 'article_delete' article.pk %}">Delete</a>
+        </div>
+    </article>
+{% empty %}
+    <div class="empty-box"><p>You have not written an article yet.</p></div>
+{% endfor %}
+{% endblock %}

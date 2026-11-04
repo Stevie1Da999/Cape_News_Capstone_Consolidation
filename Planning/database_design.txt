@@ -1,0 +1,21 @@
+NEWS APPLICATION - DATABASE DESIGN
+
+User
+- Extends Django AbstractUser.
+- Stores one role: Reader, Editor or Journalist.
+- Reader subscriptions use many-to-many links to Publisher and Journalist users.
+
+Publisher
+- Stores name and description once.
+- Many-to-many links connect Editors and Journalists to publishers.
+
+Article
+- Has one Journalist author.
+- May have one Publisher or no Publisher for independent work.
+- Stores title, content, creation date and approval state.
+
+Newsletter
+- Has one staff author.
+- Many-to-many link to Articles so one article can appear in more than one newsletter.
+
+This structure is normalized because user, publisher and article information is stored once and relationships are represented with foreign keys or many-to-many tables instead of duplicated text.

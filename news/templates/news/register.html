@@ -1,0 +1,16 @@
+{% extends "news/base.html" %}
+{% block title %}Register | Cape News{% endblock %}
+
+{% block content %}
+<div class="form-shell narrow">
+    <p class="eyebrow">CREATE ACCOUNT</p>
+    <h1>Create an account</h1>
+    <p>Choose whether you are registering as a Reader, Journalist or Editor.</p>
+    <!-- The selected role is also checked on the backend before the account is saved. -->
+    <form method="post" class="stack-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="button" type="submit">Register</button>
+    </form>
+</div>
+{% endblock %}

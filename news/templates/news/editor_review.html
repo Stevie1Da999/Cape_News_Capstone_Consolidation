@@ -1,0 +1,25 @@
+{% extends "news/base.html" %}
+{% block title %}Editor Review | Cape News{% endblock %}
+
+{% block content %}
+<p class="eyebrow">EDITOR DESK</p>
+<h1>Waiting for review</h1>
+<p class="intro">Check the article before approving it for readers.</p>
+
+{% for article in pending_articles %}
+    <article class="manage-row">
+        <div>
+            <p class="meta">{{ article.author.username }} · {{ article.created_at|date:"d M Y" }}</p>
+            <h2>{{ article.title }}</h2>
+            <p>{{ article.content|truncatewords:28 }}</p>
+        </div>
+        <div class="actions">
+            <a href="{% url 'approve_article' article.pk %}">Review</a>
+            <a href="{% url 'article_update' article.pk %}">Edit</a>
+            <a href="{% url 'article_delete' article.pk %}">Delete</a>
+        </div>
+    </article>
+{% empty %}
+    <div class="empty-box"><p>Nothing is waiting for approval right now.</p></div>
+{% endfor %}
+{% endblock %}

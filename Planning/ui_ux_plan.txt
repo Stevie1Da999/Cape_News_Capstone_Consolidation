@@ -1,0 +1,24 @@
+NEWS APPLICATION - UI/UX PLAN
+
+The website uses a simple newspaper look instead of a complicated dashboard. The main page shows approved stories in cards with the publisher, date, headline, short preview and journalist.
+
+Reader flow:
+- Register or login.
+- Read approved articles and newsletters.
+- Open Subscriptions to follow publishers and journalists.
+- Use the subscribed REST API feed when authenticated by token.
+
+Journalist flow:
+- Login and open My Articles.
+- Create an independent article or select a publisher they work for.
+- See whether each article is approved or waiting for approval.
+- Edit or delete their own articles.
+- Create and edit newsletters using approved articles.
+
+Editor flow:
+- Login and open Review.
+- See all articles waiting for approval.
+- Read the full article, edit it if needed, approve it, or delete it.
+- Create and manage newsletters.
+
+The navigation changes based on the logged-in role so users do not see links that do not apply to them. Server-side permission checks are still used because hiding a link is not enough security.

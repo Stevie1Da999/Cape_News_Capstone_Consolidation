@@ -1,0 +1,15 @@
+{% extends "news/base.html" %}
+{% block title %}Delete Article | Cape News{% endblock %}
+
+{% block content %}
+<div class="form-shell">
+    <p class="eyebrow">CONFIRM DELETE</p>
+    <h1>Delete “{{ article.title }}”?</h1>
+    <p>This cannot be undone.</p>
+    <form method="post" class="inline-actions">
+        {% csrf_token %}
+        <button class="button danger" type="submit">Delete article</button>
+        <a class="button secondary" href="{% url 'article_list' %}">Cancel</a>
+    </form>
+</div>
+{% endblock %}

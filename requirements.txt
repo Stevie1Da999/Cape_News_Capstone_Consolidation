@@ -1,0 +1,11 @@
+# Django and the API from my original News Application project.
+Django==6.1.2
+djangorestframework==3.18.3
+requests==2.34.2
+mysqlclient==2.3.0
+
+# Code checks, documentation and the Docker web server.
+flake8==7.5.0
+Sphinx>=8,<11
+gunicorn>=23,<24
+whitenoise>=6.8,<7

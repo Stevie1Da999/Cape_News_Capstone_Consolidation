@@ -1,0 +1,19 @@
+{% extends "news/base.html" %}
+{% block title %}Review {{ article.title }} | Cape News{% endblock %}
+
+{% block content %}
+<article class="article-page">
+    <p class="eyebrow">EDITOR REVIEW</p>
+    <h1>{{ article.title }}</h1>
+    <p class="byline">By {{ article.author.username }}</p>
+    <div class="article-body">{{ article.content|linebreaks }}</div>
+
+    <!-- Approval also triggers subscriber email and the required API POST. -->
+    <form method="post" class="inline-actions">
+        {% csrf_token %}
+        <button class="button" type="submit">Approve article</button>
+        <a class="button secondary" href="{% url 'article_update' article.pk %}">Edit first</a>
+        <a class="button secondary" href="{% url 'editor_review' %}">Back</a>
+    </form>
+</article>
+{% endblock %}

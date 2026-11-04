@@ -1,0 +1,17 @@
+{% extends "news/base.html" %}
+{% block title %}{{ article.title }} | Cape News{% endblock %}
+
+{% block content %}
+<article class="article-page">
+    <p class="eyebrow">
+        {% if article.publisher %}{{ article.publisher.name }}{% else %}Independent{% endif %}
+    </p>
+    <h1>{{ article.title }}</h1>
+    <p class="byline">
+        By {{ article.author.username }} · {{ article.created_at|date:"d M Y, H:i" }}
+    </p>
+    <!-- linebreaks keeps paragraphs readable when content was typed in a textarea. -->
+    <div class="article-body">{{ article.content|linebreaks }}</div>
+    <a class="text-link" href="{% url 'article_list' %}">← Back to latest stories</a>
+</article>
+{% endblock %}

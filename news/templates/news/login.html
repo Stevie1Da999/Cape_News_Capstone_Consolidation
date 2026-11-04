@@ -1,0 +1,16 @@
+{% extends "news/base.html" %}
+{% block title %}Login | Cape News{% endblock %}
+
+{% block content %}
+<div class="form-shell narrow">
+    <p class="eyebrow">ACCOUNT</p>
+    <h1>Login</h1>
+    <p>Login to use your Reader, Journalist or Editor account.</p>
+    <form method="post" class="stack-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="button" type="submit">Login</button>
+    </form>
+    <p>New reader? <a href="{% url 'register' %}">Create an account</a>.</p>
+</div>
+{% endblock %}

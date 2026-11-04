@@ -1,0 +1,37 @@
+{% extends "news/base.html" %}
+{% block title %}Newsletters | Cape News{% endblock %}
+
+{% block content %}
+<p class="eyebrow">CURATED READING</p>
+<h1>Newsletters</h1>
+<p class="intro">Collections of approved stories selected by our news team.</p>
+
+{% for newsletter in newsletters %}
+    <section class="newsletter-card">
+        <p class="meta">{{ newsletter.created_at|date:"d M Y" }} · {{ newsletter.author.username }}</p>
+        <h2>{{ newsletter.title }}</h2>
+        <p>{{ newsletter.description }}</p>
+
+        <div class="newsletter-links">
+            {% for article in newsletter.public_articles %}
+                {% if article.approved %}
+                    <a href="{% url 'article_detail' article.pk %}">{{ article.title }}</a>
+                {% endif %}
+            {% empty %}
+                <span>No articles have been added yet.</span>
+            {% endfor %}
+        </div>
+
+        {% if user.is_authenticated %}
+            {% if user.role == "editor" or newsletter.author == user %}
+                <div class="actions">
+                    <a href="{% url 'newsletter_update' newsletter.pk %}">Edit</a>
+                    <a href="{% url 'newsletter_delete' newsletter.pk %}">Delete</a>
+                </div>
+            {% endif %}
+        {% endif %}
+    </section>
+{% empty %}
+    <div class="empty-box"><p>No newsletters have been created yet.</p></div>
+{% endfor %}
+{% endblock %}

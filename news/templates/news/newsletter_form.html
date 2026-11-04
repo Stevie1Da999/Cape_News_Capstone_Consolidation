@@ -1,0 +1,15 @@
+{% extends "news/base.html" %}
+{% block title %}{{ page_title }} | Cape News{% endblock %}
+
+{% block content %}
+<div class="form-shell">
+    <p class="eyebrow">NEWSLETTER DESK</p>
+    <h1>{{ page_title }}</h1>
+    <p>Choose from articles that have already been approved.</p>
+    <form method="post" class="stack-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="button" type="submit">Save newsletter</button>
+    </form>
+</div>
+{% endblock %}

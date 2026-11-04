@@ -1,0 +1,81 @@
+/* A simple newspaper-style layout. I kept it clean instead of over-designing it. */
+:root {
+    --ink: #161616;
+    --muted: #686868;
+    --paper: #f6f3ed;
+    --card: #ffffff;
+    --line: #d7d1c7;
+    --accent: #9d2b2b;
+}
+
+* { box-sizing: border-box; }
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.6;
+}
+a { color: inherit; }
+.wrap { width: min(1080px, 92%); margin: 0 auto; }
+.site-header { background: var(--ink); color: white; border-bottom: 4px solid var(--accent); }
+.header-row { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.brand { font-family: Georgia, serif; font-size: 1.5rem; font-weight: bold; text-decoration: none; letter-spacing: 1px; }
+nav { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; }
+nav a, .link-button { color: white; text-decoration: none; font-size: .92rem; }
+nav a:hover, .link-button:hover { text-decoration: underline; }
+.nav-form { display: inline; margin: 0; }
+.link-button { background: none; border: 0; padding: 0; cursor: pointer; }
+.user-tag { color: #cfcfcf; font-size: .85rem; }
+.page-content { min-height: 70vh; padding: 48px 0 64px; }
+.hero { max-width: 760px; margin-bottom: 34px; }
+h1, h2 { font-family: Georgia, "Times New Roman", serif; line-height: 1.15; }
+h1 { font-size: clamp(2.2rem, 6vw, 4rem); margin: 6px 0 12px; }
+h2 { margin: 6px 0 10px; }
+.eyebrow, .meta, .byline { font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.intro { max-width: 700px; color: var(--muted); }
+.story-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+.story-card, .newsletter-card, .manage-row, .empty-box, .form-shell {
+    background: var(--card);
+    border: 1px solid var(--line);
+    padding: 24px;
+}
+.story-card h2 a { text-decoration: none; }
+.story-card h2 a:hover { text-decoration: underline; }
+.article-page { max-width: 780px; margin: 0 auto; }
+.article-body { font-family: Georgia, "Times New Roman", serif; font-size: 1.15rem; margin: 32px 0; }
+.text-link { font-weight: bold; }
+.page-heading, .manage-row { display: flex; justify-content: space-between; align-items: center; gap: 24px; }
+.manage-row { margin-bottom: 14px; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.actions a { font-weight: bold; font-size: .9rem; }
+.status { display: inline-block; font-size: .75rem; font-weight: bold; text-transform: uppercase; }
+.status.approved { color: #216a36; }
+.status.pending { color: #946200; }
+.newsletter-card { margin: 18px 0; }
+.newsletter-links { display: grid; gap: 6px; margin: 16px 0; }
+.form-shell { max-width: 760px; margin: 0 auto; }
+.form-shell.narrow { max-width: 520px; }
+.stack-form p { margin: 18px 0; }
+.stack-form label { display: block; font-weight: bold; margin-bottom: 5px; }
+.stack-form input[type="text"], .stack-form input[type="email"],
+.stack-form input[type="password"], .stack-form textarea, .stack-form select {
+    width: 100%; padding: 11px; border: 1px solid #aaa; background: white; font: inherit;
+}
+.checkbox-form ul { list-style: none; padding: 0; }
+.checkbox-form label { font-weight: normal; }
+.button { display: inline-block; border: 0; background: var(--ink); color: white; padding: 11px 18px; text-decoration: none; cursor: pointer; font-weight: bold; }
+.button.secondary { background: #ded8cf; color: var(--ink); }
+.button.danger { background: var(--accent); }
+.inline-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+.errorlist { color: var(--accent); }
+.helptext { display: block; color: var(--muted); font-size: .85rem; }
+.site-footer { border-top: 1px solid var(--line); padding: 24px 0; color: var(--muted); font-size: .9rem; }
+
+/* On smaller screens the cards stack so the site stays easy to read. */
+@media (max-width: 720px) {
+    .header-row, .page-heading, .manage-row { align-items: flex-start; flex-direction: column; }
+    .header-row { padding: 16px 0; }
+    .story-grid { grid-template-columns: 1fr; }
+    h1 { font-size: 2.4rem; }
+}
