@@ -1,0 +1,25 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>REST API | Cape News</title><link rel="stylesheet" href="_static/preview.css">
+</head><body><header><div class="inner"><h1>Cape News</h1><p>Django News Application documentation</p></div></header>
+<main><nav><strong>Project guide</strong><a href="index.html">Home</a><a href="getting_started.html">Getting started</a><a href="users_and_roles.html">Users and roles</a><a href="api_guide.html">REST API</a><a href="docker_setup.html">Docker</a><a href="testing.html">Testing</a><a href="modules.html">Python reference</a></nav><article><h2>REST API</h2>
+<p>The REST API uses Django REST Framework and token authentication. Replace</p>
+<p>`YOUR_TOKEN` with the real token for your account.</p>
+<h3>Common endpoints</h3>
+<ul>
+<li>`POST /api/token/`: get a login token.</li>
+<li>`GET /api/articles/`: list approved articles (login needed).</li>
+<li>`POST /api/articles/`: submit an article (Journalist only).</li>
+<li>`GET /api/articles/&lt;id&gt;/`: get a story visible to your role.</li>
+<li>`PUT/PATCH/DELETE /api/articles/&lt;id&gt;/`: edit or remove a permitted story.</li>
+<li>`GET /api/articles/subscribed/`: the Reader&#x27;s approved subscribed content.</li>
+<li>`POST /api/approved/`: signed internal approval notice (not a public action).</li>
+</ul>
+<p>Example request header</p>
+<pre><code>Authorization: Token YOUR_TOKEN</code></pre>
+<p>A Reader cannot see pending stories or create articles. Journalists cannot</p>
+<p>approve their own articles. The API checks a signed header before accepting</p>
+<p>approval messages, so a normal user cannot approve a story using that route.</p>
+<p>If you receive `401` or `403`, check that the token and account role</p>
+<p>are correct. Invalid form data should give a validation error.</p></article></main>
+<footer>HTML preview generated from the Sphinx source files. Run sphinx-build to generate the official Sphinx HTML output.</footer></body></html>

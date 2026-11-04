@@ -1,3 +1,5 @@
+"""Turn our news models into JSON and check API input."""
+
 # Serializers turn Django model objects into JSON and validate API input.
 from rest_framework import serializers
 
@@ -50,6 +52,8 @@ class ArticleSerializer(serializers.ModelSerializer):
 
     def validate_publisher_id(self, publisher):
         # Journalists may only post under publishers they actually work for.
+        """Stop journalists posting stories under the wrong publisher."""
+
         request = self.context.get("request")
         if (
             request
@@ -65,6 +69,8 @@ class ArticleSerializer(serializers.ModelSerializer):
     def validate_approved(self, value):
         # Approval is an Editor-only action. Journalists cannot approve their
         # own work by adding approved=true to an API request.
+        """Only allow editors to change whether a story is approved."""
+
         request = self.context.get("request")
         if request and request.user.role != "editor":
             raise serializers.ValidationError(

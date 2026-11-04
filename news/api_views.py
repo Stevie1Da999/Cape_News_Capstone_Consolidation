@@ -1,3 +1,5 @@
+"""REST API endpoints for articles and editor approvals."""
+
 # Q is useful for the subscribed feed because it needs an OR query.
 from django.db.models import Q
 from django.core import signing
@@ -18,10 +20,14 @@ class ArticleListCreateAPIView(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticated, ArticlePermission]
 
     def get_queryset(self):
+        """Only show approved stories in the main API feed."""
+
         return Article.objects.filter(approved=True).order_by("-created_at")
 
     def perform_create(self, serializer):
         # Every new article waits for Editor approval.
+        """Save a new journalist story as waiting for review."""
+
         serializer.save(author=self.request.user, approved=False)
 
 
@@ -32,6 +38,8 @@ class ArticleDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [permissions.IsAuthenticated, ArticlePermission]
 
     def get_queryset(self):
+        """Hide pending stories from readers but let staff see them."""
+
         user = self.request.user
 
         # Readers can never open an unapproved article through the API.
@@ -44,6 +52,8 @@ class ArticleDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     def perform_update(self, serializer):
         # A Journalist edit sends the article back for approval. An Editor can
         # keep/change approval because approval is part of their role.
+        """Save edits and send an approval notice when needed."""
+
         if self.request.user.role == "journalist":
             serializer.save(approved=False)
         else:
@@ -64,6 +74,8 @@ class SubscribedArticlesAPIView(generics.ListAPIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
+        """Find approved stories from the publishers and writers I follow."""
+
         user = self.request.user
 
         if user.role != "reader":
@@ -88,6 +100,8 @@ class ApprovedArticleAPIView(APIView):
     permission_classes = [permissions.AllowAny]
 
     def post(self, request):
+        """Check the signed request before recording an approval."""
+
         signature = request.headers.get("X-Approval-Signature", "")
         try:
             signed_data = signing.loads(

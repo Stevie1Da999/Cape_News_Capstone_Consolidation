@@ -1,3 +1,5 @@
+"""Make sure each user role can only do what it is allowed to do."""
+
 # SAFE_METHODS contains read-only requests such as GET and HEAD.
 from rest_framework.permissions import BasePermission, SAFE_METHODS
 
@@ -6,6 +8,8 @@ class ArticlePermission(BasePermission):
     """Apply the Reader, Editor and Journalist rules to article API calls."""
 
     def has_permission(self, request, view):
+        """Check if the role can use the requested API method."""
+
         user = request.user
 
         if not user or not user.is_authenticated:
@@ -27,6 +31,8 @@ class ArticlePermission(BasePermission):
         return False
 
     def has_object_permission(self, request, view, obj):
+        """Only allow an editor or the journalist owner to change a story."""
+
         user = request.user
 
         if request.method in SAFE_METHODS:

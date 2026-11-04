@@ -1,0 +1,27 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Docker | Cape News</title><link rel="stylesheet" href="_static/preview.css">
+</head><body><header><div class="inner"><h1>Cape News</h1><p>Django News Application documentation</p></div></header>
+<main><nav><strong>Project guide</strong><a href="index.html">Home</a><a href="getting_started.html">Getting started</a><a href="users_and_roles.html">Users and roles</a><a href="api_guide.html">REST API</a><a href="docker_setup.html">Docker</a><a href="testing.html">Testing</a><a href="modules.html">Python reference</a></nav><article><h2>Running with Docker</h2>
+<p>The Docker image contains Python and the packages needed by the project.</p>
+<p>You do not need to install Django on the computer running the container.</p>
+<h3>Quick start using SQLite</h3>
+<p>Build the image from the folder containing ``Dockerfile``</p>
+<pre><code>docker build -t cape-news .</code></pre>
+<p>Run with a secret key you generated yourself</p>
+<pre><code>docker run --rm -p 8000:8000 --name cape-news \
+-e DJANGO_SECRET_KEY=&quot;your-own-long-random-secret-key&quot; \
+-e DJANGO_DEBUG=False \
+-v cape_news_data:/app/data cape-news</code></pre>
+<p>For Windows PowerShell, use the one-line `docker run` example in README.md.</p>
+<p>The named volume saves SQLite data when the container is restarted.</p>
+<h3>MariaDB with Docker Compose</h3>
+<p>Copy `.env.example` to `.env` and change all example passwords and the</p>
+<p>Django secret key. Then run</p>
+<pre><code>docker compose -f compose.mariadb.yaml up --build -d</code></pre>
+<p>Stop the stack with</p>
+<pre><code>docker compose -f compose.mariadb.yaml down</code></pre>
+<p>Leave off `-v` when stopping so that the database data is not deleted.</p>
+<p>The image runs Django migrations and collects static files at startup, and</p>
+<p>Gunicorn serves the website. WhiteNoise serves CSS in this setup.</p></article></main>
+<footer>HTML preview generated from the Sphinx source files. Run sphinx-build to generate the official Sphinx HTML output.</footer></body></html>

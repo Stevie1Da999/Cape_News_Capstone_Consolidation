@@ -1,0 +1,32 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Getting started | Cape News</title><link rel="stylesheet" href="_static/preview.css">
+</head><body><header><div class="inner"><h1>Cape News</h1><p>Django News Application documentation</p></div></header>
+<main><nav><strong>Project guide</strong><a href="index.html">Home</a><a href="getting_started.html">Getting started</a><a href="users_and_roles.html">Users and roles</a><a href="api_guide.html">REST API</a><a href="docker_setup.html">Docker</a><a href="testing.html">Testing</a><a href="modules.html">Python reference</a></nav><article><h2>Getting started</h2>
+<p>You need Python 3.13, Git, and MariaDB if you want to use the MariaDB option.</p>
+<p>SQLite is used by default, which is simpler when testing the project.</p>
+<h3>Windows PowerShell</h3>
+<p>Open a terminal in the folder with ``manage.py``, then run</p>
+<pre><code>py -3.13 -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+python manage.py migrate
+python manage.py check
+python manage.py test
+python manage.py runserver</code></pre>
+<p>Visit `http://127.0.0.1:8000/` to see the homepage.</p>
+<p>To create an admin account, run `python manage.py createsuperuser`.</p>
+<p>Make a file named `.env` only for the Docker Compose option. Never commit</p>
+<p>that file or share real passwords. See `.env.example` for the variables.</p>
+<h3>Local MariaDB</h3>
+<p>After creating a MariaDB database and a user, set these variables in the</p>
+<p>PowerShell terminal before running Django</p>
+<pre><code>$env:DB_ENGINE = &quot;mariadb&quot;
+$env:DB_NAME = &quot;news_application&quot;
+$env:DB_USER = &quot;news_user&quot;
+$env:DB_PASSWORD = &quot;put-your-own-password-here&quot;
+$env:DB_HOST = &quot;127.0.0.1&quot;
+$env:DB_PORT = &quot;3306&quot;
+python manage.py migrate</code></pre>
+<p>Do not put the password in a Python file or into Git.</p></article></main>
+<footer>HTML preview generated from the Sphinx source files. Run sphinx-build to generate the official Sphinx HTML output.</footer></body></html>

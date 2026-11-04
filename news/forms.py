@@ -1,3 +1,5 @@
+"""Website forms for signing up and writing stories."""
+
 # Model forms keep the website forms linked to the database models.
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
@@ -20,6 +22,8 @@ class UserRegistrationForm(UserCreationForm):
 
     def clean_role(self):
         # Check the role again on the backend in case the form is changed.
+        """Check that the chosen account role is one we support."""
+
         role = self.cleaned_data["role"]
         valid_roles = {choice[0] for choice in User.ROLE_CHOICES}
 
@@ -30,6 +34,8 @@ class UserRegistrationForm(UserCreationForm):
 
     def save(self, commit=True):
         # Save the role selected by the user onto their account.
+        """Save the selected role together with the new account."""
+
         user = super().save(commit=False)
         user.role = self.cleaned_data["role"]
 
@@ -50,6 +56,8 @@ class ArticleForm(forms.ModelForm):
         }
 
     def __init__(self, *args, user=None, **kwargs):
+        """Limit the publisher choices to the journalist's own publishers."""
+
         super().__init__(*args, **kwargs)
 
         # A journalist should only be able to choose publishers they work for.
@@ -69,6 +77,8 @@ class NewsletterForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
+        """Only offer approved articles for newsletter selection."""
+
         super().__init__(*args, **kwargs)
 
         # Newsletters shown to readers should only contain approved articles.
