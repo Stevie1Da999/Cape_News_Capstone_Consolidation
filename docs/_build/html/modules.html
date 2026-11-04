@@ -1,0 +1,70 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Python reference | Cape News</title><link rel="stylesheet" href="_static/preview.css">
+</head><body><header><div class="inner"><h1>Cape News</h1><p>Django News Application documentation</p></div></header>
+<main><nav><strong>Project guide</strong><a href="index.html">Home</a><a href="getting_started.html">Getting started</a><a href="users_and_roles.html">Users and roles</a><a href="api_guide.html">REST API</a><a href="docker_setup.html">Docker</a><a href="testing.html">Testing</a><a href="modules.html">Python reference</a></nav><article><h2>Python code reference</h2>
+<p>The following pages are generated from the docstrings in the actual Django</p>
+<p>source files. Sphinx uses `autodoc` for this.</p>
+<h3>Database models</h3>
+<h3 id="news.models">news.models</h3>
+<p>Database models for Cape News accounts, stories and newsletters.</p><ul>
+<li><strong>User</strong> &mdash; User account with a role and reader subscriptions.</li>
+<li><strong>Publisher</strong> &mdash; News publisher that can have editors and journalists.</li>
+<li><strong>Article</strong> &mdash; Article written by a journalist and optionally linked to a publisher.</li>
+<li><strong>Newsletter</strong> &mdash; Collection of approved articles put together by staff.</li>
+<li><strong>ApprovalLog</strong> &mdash; Keep a record of an approved article received by our own API.</li>
+</ul>
+<h3>Website views</h3>
+<h3 id="news.views">news.views</h3>
+<p>Pages for reading stories and managing the Cape News website.</p><ul>
+<li><strong>article_list</strong> &mdash; Show the public list of approved articles.</li>
+<li><strong>article_detail</strong> &mdash; Show one approved article to a normal website visitor.</li>
+<li><strong>register</strong> &mdash; Create an account using the role selected on the registration page.</li>
+<li><strong>article_create</strong> &mdash; Let a Journalist submit an article for Editor approval.</li>
+<li><strong>my_articles</strong> &mdash; Give Journalists a simple place to manage their own work.</li>
+<li><strong>article_update</strong> &mdash; Allow an Editor or the article owner to edit an article.</li>
+<li><strong>article_delete</strong> &mdash; Allow Editors or the article owner to delete an article.</li>
+<li><strong>editor_review</strong> &mdash; Show Editors the articles that are still waiting for approval.</li>
+<li><strong>notify_approved_article</strong> &mdash; Email subscribers and POST the approval to our signed internal API.</li>
+<li><strong>approve_article</strong> &mdash; Approve an article, email subscribers and POST to /api/approved/.</li>
+<li><strong>newsletter_list</strong> &mdash; Show newsletters and the approved articles inside them.</li>
+<li><strong>newsletter_create</strong> &mdash; Allow Journalists and Editors to create newsletters.</li>
+<li><strong>newsletter_update</strong> &mdash; Allow an Editor or newsletter owner to update a newsletter.</li>
+<li><strong>newsletter_delete</strong> &mdash; Allow an Editor or newsletter owner to delete a newsletter.</li>
+<li><strong>subscriptions</strong> &mdash; Let Readers choose the publishers and journalists they follow.</li>
+</ul>
+<h3>API views</h3>
+<h3 id="news.api_views">news.api_views</h3>
+<p>REST API endpoints for articles and editor approvals.</p><ul>
+<li><strong>ArticleListCreateAPIView</strong> &mdash; GET approved articles and POST a new Journalist article.</li>
+<li><strong>ArticleDetailAPIView</strong> &mdash; GET one article and allow permitted updates/deletes.</li>
+<li><strong>SubscribedArticlesAPIView</strong> &mdash; Return approved articles from a Reader&#x27;s subscriptions only.</li>
+<li><strong>ApprovedArticleAPIView</strong> &mdash; Receive and store signed approval messages from our own application.</li>
+</ul>
+<h3>Forms</h3>
+<h3 id="news.forms">news.forms</h3>
+<p>Website forms for signing up and writing stories.</p><ul>
+<li><strong>UserRegistrationForm</strong> &mdash; Registration form for the three user roles used by the news website.</li>
+<li><strong>ArticleForm</strong> &mdash; Form used by journalists and editors when working with articles.</li>
+<li><strong>NewsletterForm</strong> &mdash; Form for creating and editing newsletters.</li>
+<li><strong>SubscriptionForm</strong> &mdash; Lets a Reader choose publishers and journalists to follow.</li>
+</ul>
+<h3>API serializers</h3>
+<h3 id="news.serializers">news.serializers</h3>
+<p>Turn our news models into JSON and check API input.</p><ul>
+<li><strong>UserSerializer</strong> &mdash; Small safe version of a user for API responses.</li>
+<li><strong>PublisherSerializer</strong> &mdash; Publisher information used by the API.</li>
+<li><strong>ArticleSerializer</strong> &mdash; Article serializer used for list, create and detail endpoints.</li>
+<li><strong>NewsletterSerializer</strong> &mdash; Newsletter serializer required by the project brief.</li>
+</ul>
+<h3>API permissions</h3>
+<h3 id="news.permissions">news.permissions</h3>
+<p>Make sure each user role can only do what it is allowed to do.</p><ul>
+<li><strong>ArticlePermission</strong> &mdash; Apply the Reader, Editor and Journalist rules to article API calls.</li>
+</ul>
+<h3>Role setup</h3>
+<h3 id="news.signals">news.signals</h3>
+<p>Set up the Reader, Editor and Journalist groups after migrations.</p><ul>
+<li><strong>create_role_groups</strong> &mdash; Create role groups and give them the permissions from the brief.</li>
+</ul></article></main>
+<footer>HTML preview generated from the Sphinx source files. Run sphinx-build to generate the official Sphinx HTML output.</footer></body></html>
