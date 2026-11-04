@@ -1,3 +1,5 @@
+"""Database models for Cape News accounts, stories and newsletters."""
+
 # The custom user model lets us keep the three project roles in one place.
 from django.contrib.auth.models import AbstractUser, Group
 from django.core.exceptions import ValidationError
@@ -112,6 +114,8 @@ class Article(models.Model):
     def clean(self):
         # A publisher article must be written by one of that publisher's
         # journalists. If there is no publisher, it is an independent article.
+        """Check that the author works for the chosen publisher."""
+
         if (
             self.publisher_id
             and self.author_id
