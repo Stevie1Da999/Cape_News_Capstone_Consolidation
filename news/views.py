@@ -1,3 +1,5 @@
+"""Pages for reading stories and managing the Cape News website."""
+
 # requests is used for the required POST to our approved-article API endpoint.
 import requests
 
