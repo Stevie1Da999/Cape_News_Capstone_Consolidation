@@ -1,25 +1,137 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>REST API | Cape News</title><link rel="stylesheet" href="_static/preview.css">
-</head><body><header><div class="inner"><h1>Cape News</h1><p>Django News Application documentation</p></div></header>
-<main><nav><strong>Project guide</strong><a href="index.html">Home</a><a href="getting_started.html">Getting started</a><a href="users_and_roles.html">Users and roles</a><a href="api_guide.html">REST API</a><a href="docker_setup.html">Docker</a><a href="testing.html">Testing</a><a href="modules.html">Python reference</a></nav><article><h2>REST API</h2>
-<p>The REST API uses Django REST Framework and token authentication. Replace</p>
-<p>`YOUR_TOKEN` with the real token for your account.</p>
-<h3>Common endpoints</h3>
-<ul>
-<li>`POST /api/token/`: get a login token.</li>
-<li>`GET /api/articles/`: list approved articles (login needed).</li>
-<li>`POST /api/articles/`: submit an article (Journalist only).</li>
-<li>`GET /api/articles/&lt;id&gt;/`: get a story visible to your role.</li>
-<li>`PUT/PATCH/DELETE /api/articles/&lt;id&gt;/`: edit or remove a permitted story.</li>
-<li>`GET /api/articles/subscribed/`: the Reader&#x27;s approved subscribed content.</li>
-<li>`POST /api/approved/`: signed internal approval notice (not a public action).</li>
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>REST API &#8212; Cape News - Django News Application 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=1b4fdc51" />
+    <script src="_static/documentation_options.js?v=f2a433a1"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Running with Docker" href="docker_setup.html" />
+    <link rel="prev" title="Users and roles" href="users_and_roles.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="rest-api">
+<h1>REST API<a class="headerlink" href="#rest-api" title="Link to this heading">¶</a></h1>
+<p>The REST API uses Django REST Framework and token authentication. Replace
+<code class="docutils literal notranslate"><span class="pre">YOUR_TOKEN</span></code> with the real token for your account.</p>
+<section id="common-endpoints">
+<h2>Common endpoints<a class="headerlink" href="#common-endpoints" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/api/token/</span></code>: get a login token.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/articles/</span></code>: list approved articles (login needed).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/api/articles/</span></code>: submit an article (Journalist only).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/articles/&lt;id&gt;/</span></code>: get a story visible to your role.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PUT/PATCH/DELETE</span> <span class="pre">/api/articles/&lt;id&gt;/</span></code>: edit or remove a permitted story.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/articles/subscribed/</span></code>: the Reader’s approved subscribed content.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/api/approved/</span></code>: signed internal approval notice (not a public action).</p></li>
 </ul>
-<p>Example request header</p>
-<pre><code>Authorization: Token YOUR_TOKEN</code></pre>
-<p>A Reader cannot see pending stories or create articles. Journalists cannot</p>
-<p>approve their own articles. The API checks a signed header before accepting</p>
-<p>approval messages, so a normal user cannot approve a story using that route.</p>
-<p>If you receive `401` or `403`, check that the token and account role</p>
-<p>are correct. Invalid form data should give a validation error.</p></article></main>
-<footer>HTML preview generated from the Sphinx source files. Run sphinx-build to generate the official Sphinx HTML output.</footer></body></html>
+<p>Example request header:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Authorization</span><span class="p">:</span> <span class="n">Token</span> <span class="n">YOUR_TOKEN</span>
+</pre></div>
+</div>
+<p>A Reader cannot see pending stories or create articles. Journalists cannot
+approve their own articles. The API checks a signed header before accepting
+approval messages, so a normal user cannot approve a story using that route.</p>
+<p>If you receive <code class="docutils literal notranslate"><span class="pre">401</span></code> or <code class="docutils literal notranslate"><span class="pre">403</span></code>, check that the token and account role
+are correct. Invalid form data should give a validation error.</p>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Cape News - Django News Application</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Project guide</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="users_and_roles.html">Users and roles</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">REST API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#common-endpoints">Common endpoints</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="docker_setup.html">Running with Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing and code checks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">Python code reference</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="users_and_roles.html" title="previous chapter">Users and roles</a></li>
+      <li>Next: <a href="docker_setup.html" title="next chapter">Running with Docker</a></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2026, Cape News project.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.2.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

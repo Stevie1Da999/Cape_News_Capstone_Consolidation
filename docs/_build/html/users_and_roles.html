@@ -1,31 +1,137 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Users and roles | Cape News</title><link rel="stylesheet" href="_static/preview.css">
-</head><body><header><div class="inner"><h1>Cape News</h1><p>Django News Application documentation</p></div></header>
-<main><nav><strong>Project guide</strong><a href="index.html">Home</a><a href="getting_started.html">Getting started</a><a href="users_and_roles.html">Users and roles</a><a href="api_guide.html">REST API</a><a href="docker_setup.html">Docker</a><a href="testing.html">Testing</a><a href="modules.html">Python reference</a></nav><article><h2>Users and roles</h2>
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Users and roles &#8212; Cape News - Django News Application 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=1b4fdc51" />
+    <script src="_static/documentation_options.js?v=f2a433a1"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="REST API" href="api_guide.html" />
+    <link rel="prev" title="Getting started" href="getting_started.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="users-and-roles">
+<h1>Users and roles<a class="headerlink" href="#users-and-roles" title="Link to this heading">¶</a></h1>
 <p>There are three roles in Cape News:</p>
-<ul>
-<li>Reader: can read approved articles and newsletters, and follow publishers</li>
+<ul class="simple">
+<li><p><strong>Reader</strong>: can read approved articles and newsletters, and follow publishers
+or independent journalists. A Reader cannot create or approve content.</p></li>
+<li><p><strong>Journalist</strong>: can create stories, edit their own articles, and put together
+newsletters. Their articles start off unapproved.</p></li>
+<li><p><strong>Editor</strong>: can review and approve articles, and can update or delete them.</p></li>
 </ul>
-<p>or independent journalists. A Reader cannot create or approve content.</p>
-<ul>
-<li>Journalist: can create stories, edit their own articles, and put together</li>
+<p>The <code class="docutils literal notranslate"><span class="pre">User</span></code> model saves each person’s role and places them in the matching
+Django group. If a Reader changes to a staff role, old Reader subscriptions
+are cleared.</p>
+<section id="how-an-article-gets-approved">
+<h2>How an article gets approved<a class="headerlink" href="#how-an-article-gets-approved" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p>A journalist submits an article, which starts off unapproved.</p></li>
+<li><p>An editor reviews the article on the website.</p></li>
+<li><p>When the editor approves it, readers can see it in the feed.</p></li>
+<li><p>The app emails subscribed readers and records the approval.</p></li>
+<li><p>Signed internal API messages are checked before the approval is logged.</p></li>
+</ol>
+<p>The website checks permissions, but the API checks them too. This means
+someone cannot get extra access just by sending a request manually.</p>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Cape News - Django News Application</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Project guide</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Users and roles</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#how-an-article-gets-approved">How an article gets approved</a></li>
 </ul>
-<p>newsletters. Their articles start off unapproved.</p>
-<ul>
-<li>Editor: can review and approve articles, and can update or delete them.</li>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api_guide.html">REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker_setup.html">Running with Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing and code checks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">Python code reference</a></li>
 </ul>
-<p>The `User` model saves each person&#x27;s role and places them in the matching</p>
-<p>Django group. If a Reader changes to a staff role, old Reader subscriptions</p>
-<p>are cleared.</p>
-<h3>How an article gets approved</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
 <ul>
-<li>A journalist submits an article, which starts off unapproved.</li>
-<li>An editor reviews the article on the website.</li>
-<li>When the editor approves it, readers can see it in the feed.</li>
-<li>The app emails subscribed readers and records the approval.</li>
-<li>Signed internal API messages are checked before the approval is logged.</li>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="getting_started.html" title="previous chapter">Getting started</a></li>
+      <li>Next: <a href="api_guide.html" title="next chapter">REST API</a></li>
+  </ul></li>
 </ul>
-<p>The website checks permissions, but the API checks them too. This means</p>
-<p>someone cannot get extra access just by sending a request manually.</p></article></main>
-<footer>HTML preview generated from the Sphinx source files. Run sphinx-build to generate the official Sphinx HTML output.</footer></body></html>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2026, Cape News project.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.2.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
