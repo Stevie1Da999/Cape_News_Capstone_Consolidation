@@ -1,3 +1,5 @@
+"""Set up the Reader, Editor and Journalist groups after migrations."""
+
 # This signal creates the role groups and sets up their permissions.
 from django.contrib.auth.models import Group, Permission
 from django.db.models.signals import post_migrate
