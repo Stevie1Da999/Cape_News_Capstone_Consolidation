@@ -22,7 +22,7 @@ a Docker setup and instructions for running the project on another computer.
 You need Python 3.13 and an internet connection to install the packages.
 Open PowerShell in the folder containing `manage.py` and run:
 
-```powershell
+powershell
 py -3.13 -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install -r requirements.txt
@@ -32,33 +32,33 @@ python manage.py check
 python manage.py test
 flake8 .
 python manage.py runserver
-```
+
 
 Open http://127.0.0.1:8000/ in the browser. SQLite is the default database.
 The `.venv` folder and local database do not go to GitHub.
 
 If PowerShell blocks venv activation for this session, run:
 
-```powershell
+powershell
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned
 .\.venv\Scripts\Activate.ps1
-```
+
 
 ## Option 2: Run it with Docker (SQLite, quickest option)
 
 Install Docker Desktop, start it, and open PowerShell in the project folder.
 Generate a secret key and copy the output somewhere safe:
 
-```powershell
+powershell
 python -c "import secrets; print(secrets.token_urlsafe(50))"
-```
+
 
 Create the image, then run it with a value you generated yourself:
 
-```powershell
+powershell
 docker build -t cape-news .
 docker run --rm -p 8000:8000 --name cape-news -e DJANGO_SECRET_KEY="REPLACE_WITH_YOUR_RANDOM_KEY" -e DJANGO_DEBUG=False -v cape_news_data:/app/data cape-news
-```
+
 
 Visit http://localhost:8000/. The `cape_news_data` volume keeps the SQLite
 database when the container is stopped. Stop it with `Ctrl+C`.
@@ -70,32 +70,32 @@ Gunicorn serves the pages and WhiteNoise serves static files.
 
 Create your own environment file using the example:
 
-```powershell
+powershell
 Copy-Item .env.example .env
 notepad .env
-```
+
 
 Replace `DJANGO_SECRET_KEY`, `DB_PASSWORD`, and `DB_ROOT_PASSWORD` with
 strong values you created. Do not upload `.env` to GitHub.
 
-```powershell
+powershell
 docker compose -f compose.mariadb.yaml up --build -d
 docker compose -f compose.mariadb.yaml ps
 docker compose -f compose.mariadb.yaml logs web
-```
+
 
 The site will be at http://localhost:8000/ once the database is ready.
 To create an admin user with Docker Compose:
 
-```powershell
+powershell
 docker compose -f compose.mariadb.yaml exec web python manage.py createsuperuser
-```
+
 
 Stop the containers without deleting the database:
 
-```powershell
+powershell
 docker compose -f compose.mariadb.yaml down
-```
+
 
 **Do not use** `down -v` unless you want to delete the MariaDB data volume.
 
@@ -104,7 +104,7 @@ docker compose -f compose.mariadb.yaml down
 The database must exist first and its user needs permission to use it.
 Set the following for your own PowerShell session:
 
-```powershell
+powershell
 $env:DB_ENGINE="mariadb"
 $env:DB_NAME="news_application"
 $env:DB_USER="news_user"
@@ -113,7 +113,7 @@ $env:DB_HOST="127.0.0.1"
 $env:DB_PORT="3306"
 python manage.py migrate
 python manage.py runserver
-```
+
 
 `mysqlclient` is in `requirements.txt`. Linux machines may need MariaDB client
 development headers to install it. Docker handles these for you.
@@ -145,9 +145,9 @@ header, so it is not a public way of approving an article.
 
 After installing the Python dependencies, build the documentation:
 
-```powershell
+powershell
 sphinx-build -b html docs docs/_build/html
-```
+
 
 Open `docs/_build/html/index.html` in a browser. The folder includes an HTML
 preview so the guides can be read before a Sphinx build. Run the command
@@ -158,13 +158,13 @@ autodoc reference for the code. Keep the finished HTML files in your repo.
 
 Run all of these after installing the packages:
 
-```powershell
+powershell
 python manage.py check
 python manage.py makemigrations --check --dry-run
 python manage.py test
 flake8 .
 sphinx-build -b html docs docs/_build/html
-```
+
 
 For Docker, run `docker build -t cape-news .` and open the website. Try a
 Reader, a Journalist and an Editor account to check the workflow.
@@ -180,11 +180,11 @@ Create your own **public** GitHub repository, add it as `origin`, and push all
 three branches. Once it is public, replace the placeholder in `capstone.txt`
 with your real repository link, then commit and push that change.
 
-```powershell
+powershell
 git remote add origin https://github.com/YOUR_USERNAME/YOUR_PUBLIC_REPO.git
 git push -u origin main
 git push origin docs container
-```
+
 
 If the repository already has a remote called `origin`, update it using
 `git remote set-url origin ...` instead of `git remote add origin ...`.
