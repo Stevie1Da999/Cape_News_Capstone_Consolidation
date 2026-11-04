@@ -7,16 +7,24 @@ from pathlib import Path
 # BASE_DIR points to the main project folder.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# This is fine for a student development project. A deployed project should
-# load its secret key from an environment variable instead.
-SECRET_KEY = os.getenv(
-    "DJANGO_SECRET_KEY",
-    "django-insecure-news-application-development-key",
-)
-
-# Debug is useful while developing locally.
+# Running locally is simple, but a deployed site must have its own secret.
 DEBUG = os.getenv("DJANGO_DEBUG", "True").lower() == "true"
-ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "")
+if not SECRET_KEY:
+    if DEBUG:
+        # This fallback is only for local practice. Never use it online.
+        SECRET_KEY = "django-insecure-local-cape-news-only"
+    else:
+        raise RuntimeError("Set DJANGO_SECRET_KEY when DJANGO_DEBUG=False.")
+
+# Docker uses these hosts, and an owner can add more using an environment var.
+ALLOWED_HOSTS = [
+    host.strip()
+    for host in os.getenv(
+        "DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost"
+    ).split(",")
+    if host.strip()
+]
 
 
 INSTALLED_APPS = [
@@ -38,6 +46,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -84,7 +93,7 @@ else:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
-            "NAME": BASE_DIR / "db.sqlite3",
+            "NAME": os.getenv("SQLITE_PATH", str(BASE_DIR / "db.sqlite3")),
         }
     }
 
@@ -114,6 +123,13 @@ USE_TZ = True
 
 # Static files include the small stylesheet used by the website.
 STATIC_URL = "static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
+# WhiteNoise serves the CSS files when DEBUG is off in Docker.
+STORAGES = {
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage"
+    },
+}
 
 # Our User model stores the Reader, Editor and Journalist roles.
 AUTH_USER_MODEL = "news.User"
